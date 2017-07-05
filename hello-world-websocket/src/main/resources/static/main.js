@@ -1,13 +1,19 @@
 
 var stompClientRT = null;
-var stompClientInit = null;
-
 const dateTimeFormat = "MMMM Do YYYY, h:mm:ss a";
 moment.locale();
 
+/**
+ * 
+ * Real-Time messages
+ * 
+ * @param connected
+ * @returns
+ */
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
+    $("#initMessages").prop("disabled", !connected);
     
     if (connected) {
         $("#conversation").show();
@@ -22,6 +28,12 @@ function setConnected(connected) {
     
 }
 
+/**
+ * 
+ * Real-Time messages
+ * 
+ * @returns
+ */
 function connect() {
     var socketRT = new SockJS('/hello-world-websocket');
     stompClientRT = Stomp.over(socketRT);
@@ -29,7 +41,8 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);       
         
-        stompClientRT.subscribe('/topic/messages', function (msg) {
+        stompClientRT.subscribe('/topic/messages', function (msg) { 
+        	console.log('onmessage for Init: ' + msg);  
         	showMessage(JSON.parse(msg.body));
         }); 
     });
@@ -39,30 +52,30 @@ function disconnect() {
     if (stompClientRT != null) {
     	stompClientRT.disconnect();
     }
-    if (stompClientInit != null) {
-    	stompClientInit.disconnect();
-    }
     setConnected(false);
     console.log("Disconnected");
 }
 
+/**
+ * 
+ * init messages
+ * 
+ * @returns
+ */
 function initMessages() {
 	$("#messages").html("");
 	
-    var socketInit = new SockJS('/hello-world-websocket');
-    stompClientInit = Stomp.over(socketInit);
-    stompClientInit.connect({}, function (frame) { 
-        console.log('Connected for Init: ' + frame);       
-        
-        var initSubcription = stompClientInit.subscribe('/user/init/messages', function (msg) {
-        	console.log('stompClientInit onmessage for Init: ' + frame);  
-        	showMessage(JSON.parse(msg.body));
-        /*	initSubcription.unsubscribe();
-        	console.log('Init Done'); 
-        	stompClientInit.disconnect();
-        	stompClientInit = null; */
-        });
+	var initSubcription = stompClientRT.subscribe('/user/init/messages', function (msg) {
+    	console.log('stompClientInit onmessage for Init: ' + msg);  
+    	
+    	_.forEach(JSON.parse(msg.body), function(value) {
+		     showMessage(value);
+	     });//foreach function
+    	    	
+    	initSubcription.unsubscribe();
+    	console.log('Init Done'); 
     });
+ 
 }
 
 function sendMessage() {
@@ -88,6 +101,7 @@ function showMessage(message) {
 }
 
 $(function () {
+	
 	$("#messages").html("");
 	
 	$("#conversation").hide();
@@ -100,4 +114,7 @@ $(function () {
     	 e.preventDefault();
 		 sendMessage(); 	
     })
+    
+    $("#disconnect").prop("disabled", true);
+    $("#initMessages").prop("disabled", true);
 });

@@ -9,11 +9,20 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 
+
+/**
+ * 
+ * 
+ * These are realtive to ApplicationDestinationPrefixes ( "/app"  )
+ * 
+ * @author "stefano.campanini@gmail.com"
+ *
+ */
 @Controller
 public class MessageController extends AbstractController {
 
   public static final String TARGET_TOPIC = "/topic/messages";
-  public static final String TARGET_INIT_TOPIC = WebSocketConfig.WS_USER_DEST_PREFIX + "/init/messages";
+  public static final String TARGET_INIT_TOPIC = "/init/messages";
   
   @Autowired
   private MessageStoreStub messageStoreStub;
