@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hello World WebSocket</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   
+    <link href="/main.css" rel="stylesheet">    
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">        <!-- Bootstrap Core CSS  -->
+    
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/momentjs/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="/webjars/lodash/lodash.min.js"></script>
+    
+    <script type="text/javascript" src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script type="text/javascript" src="/webjars/stomp-websocket/stomp.min.js"></script>
+      
+    <script type="text/javascript" src="main.js"></script>    	
+
+</head>
+
+<body>
+
+     <div class="container">
+	     <div class="page-header">
+	        <h1>WebSocket with Spring: Hello World Example</h1>
+	      </div>
+
+	     <div class="panel panel-default realTimeStatus">
+		  <div class="panel-body">
+		     <div style="color:#66FF00;display:none;" id="testRealTimeWsActive">
+		       <span class="glyphicon glyphicon-ok-circle">
+		           <span style="color:black;">&#160;RealTime-Active</span>
+		       </span>
+		    </div>
+		    <div style="color:#FFE680;">
+		       <span class="glyphicon glyphicon-ban-circle" id="testRealTimeWsNotActive">
+		          <span style="color:black;">&#160;RealTime-Not-Active</span>
+		       </span>
+		    </div>
+		  </div>
+		  <div class="panel-footer">
+		     <button id="connect" class="btn btn-default" type="submit">Connect</button>
+             <button id="disconnect" class="btn btn-default" type="submit">Disconnect</button>
+             <button id="initMessages" class="btn btn-default" type="submit">Get Old Messages</button>
+		  </div>
+		</div>
+            
+	    <div id="conversation">	
+	      <div class="panel panel-default">
+			  <div class="panel-body">
+			    <form class="form" id="addMessageForm" >	
+			      <div class="row">		
+			        <div class="col-md-12 form-group">	
+						<textarea id="body" required="required"  class="form-control" rows="3" placeholder="Message here...."></textarea>     
+				    </div>	
+				  </div>
+				  <div class="row">		
+				    <div class="col-md-7 form-group">							
+					   <input type="text" id="sender" required="required" class="form-control" placeholder="Sender here....">						   
+					</div>	
+					<div class="col-md-5 form-group">	    
+						<button id="send" class="btn btn-default" type="submit">Send</button>
+					</div>
+				  </div>
+			    </form>		
+			  </div>
+			</div>
+		</div>
+		<div id="messages"></div>	
+    </div> <!-- container -->
+    
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Tinvention - Ingegneria Informatica - </p>
+      </div>
+    </footer>
+ 
+     
+
+</script>
+    
+
+</body>
+
+</html>
