@@ -39,9 +39,9 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
   @Override
   public void configureMessageBroker(MessageBrokerRegistry config) {
-    config.setApplicationDestinationPrefixes(WS_APP_PREFIX, WS_USER_DEST_PREFIX);
-    config.enableSimpleBroker("/topic");
-    config.setUserDestinationPrefix(WS_USER_DEST_PREFIX); //it use the websocket Session ...
+   config.setApplicationDestinationPrefixes(WS_APP_PREFIX, WS_USER_DEST_PREFIX);
+   config.enableSimpleBroker("/topic");
+   config.setUserDestinationPrefix(WS_USER_DEST_PREFIX); //it uses the websocket Session ...
   }
 
   @Override

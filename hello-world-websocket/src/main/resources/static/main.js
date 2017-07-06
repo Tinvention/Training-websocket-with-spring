@@ -97,7 +97,7 @@ function showMessage(message) {
 	var templateItem = '<div class="panel panel-default"><div class="panel-body">${body}</div> ' 
 	                 + '<div class="panel-footer text-right">${moment(new Date(sent)).format(dateTimeFormat)} by <i>${sender}</i></div>';
 	var item = fmtr(templateItem, message);
-	$("#messages").prepend(item);
+	$("#messages").append(item);
 }
 
 $(function () {
