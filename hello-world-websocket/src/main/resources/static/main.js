@@ -100,11 +100,7 @@ function showMessage(message) {
 	$("#messages").append(item);
 }
 
-$(function () {
-	
-	$("#messages").html("");
-	
-	$("#conversation").hide();
+$(function () {	
 	
 	$( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 
 /**
  * 
- * These are realtive to ApplicationDestinationPrefixes ( "/app" )
+ * These are realtive to ApplicationDestinationPrefixes ( "/app" , "/user")
  * @author "stefano.campanini@gmail.com"
  * 
  */

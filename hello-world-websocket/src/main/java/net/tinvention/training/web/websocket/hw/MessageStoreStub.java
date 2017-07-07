@@ -1,6 +1,7 @@
 package net.tinvention.training.web.websocket.hw;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageStoreStub {
 
-  private List<Message> stored = new ArrayList<>();
+  private List<Message> stored = Collections.synchronizedList(new ArrayList<>());
 
   public boolean add(Message arg0) {
     return stored.add(arg0);
